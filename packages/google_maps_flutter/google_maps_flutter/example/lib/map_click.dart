@@ -1,4 +1,4 @@
-// Copyright 2019 The Chromium Authors. All rights reserved.
+// Copyright 2013 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -68,15 +68,27 @@ class _MapClickBodyState extends State<_MapClickBody> {
     if (mapController != null) {
       final String lastTap = 'Tap:\n${_lastTap ?? ""}\n';
       final String lastLongPress = 'Long press:\n${_lastLongPress ?? ""}';
-      columnChildren
-          .add(Center(child: Text(lastTap, textAlign: TextAlign.center)));
+      columnChildren.add(Center(
+          child: Text(
+        lastTap,
+        textAlign: TextAlign.center,
+      )));
+      columnChildren.add(Center(
+          child: Text(
+        _lastTap != null ? 'Tapped' : '',
+        textAlign: TextAlign.center,
+      )));
       columnChildren.add(Center(
           child: Text(
         lastLongPress,
         textAlign: TextAlign.center,
       )));
+      columnChildren.add(Center(
+          child: Text(
+        _lastLongPress != null ? 'Long pressed' : '',
+        textAlign: TextAlign.center,
+      )));
     }
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,

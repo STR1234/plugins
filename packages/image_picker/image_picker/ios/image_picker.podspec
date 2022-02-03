@@ -12,15 +12,11 @@ Downloaded by pub (not CocoaPods).
   s.homepage         = 'https://github.com/flutter/plugins'
   s.license          = { :type => 'BSD', :file => '../LICENSE' }
   s.author           = { 'Flutter Dev Team' => 'flutter-dev@googlegroups.com' }
-  s.source           = { :http => 'https://github.com/flutter/plugins/tree/master/packages/image_picker' }
+  s.source           = { :http => 'https://github.com/flutter/plugins/tree/main/packages/image_picker' }
   s.documentation_url = 'https://pub.dev/packages/image_picker'
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
-  s.platform = :ios, '8.0'
-  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
-
-  s.test_spec 'Tests' do |test_spec|
-    test_spec.source_files = 'Tests/**/*'
-  end
+  s.platform = :ios, '9.0'
+  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
 end

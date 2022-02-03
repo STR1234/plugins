@@ -1,4 +1,4 @@
-// Copyright 2019 The Chromium Authors. All rights reserved.
+// Copyright 2013 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -26,9 +26,9 @@ String serializeFocusMode(FocusMode focusMode) {
 /// Returns the focus mode for a given String.
 FocusMode deserializeFocusMode(String str) {
   switch (str) {
-    case "locked":
+    case 'locked':
       return FocusMode.locked;
-    case "auto":
+    case 'auto':
       return FocusMode.auto;
     default:
       throw ArgumentError('"$str" is not a valid FocusMode value');

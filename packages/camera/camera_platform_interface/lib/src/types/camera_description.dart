@@ -1,6 +1,8 @@
-// Copyright 2018 The Chromium Authors. All rights reserved.
+// Copyright 2013 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
+
+import 'package:flutter/foundation.dart';
 
 /// The direction the camera is facing.
 enum CameraLensDirection {
@@ -15,9 +17,10 @@ enum CameraLensDirection {
 }
 
 /// Properties of a camera device.
+@immutable
 class CameraDescription {
   /// Creates a new camera description with the given properties.
-  CameraDescription({
+  const CameraDescription({
     required this.name,
     required this.lensDirection,
     required this.sensorOrientation,
@@ -51,6 +54,7 @@ class CameraDescription {
 
   @override
   String toString() {
-    return '$runtimeType($name, $lensDirection, $sensorOrientation)';
+    return '${objectRuntimeType(this, 'CameraDescription')}('
+        '$name, $lensDirection, $sensorOrientation)';
   }
 }

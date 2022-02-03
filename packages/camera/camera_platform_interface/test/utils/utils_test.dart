@@ -1,3 +1,7 @@
+// Copyright 2013 The Flutter Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'package:camera_platform_interface/camera_platform_interface.dart';
 import 'package:camera_platform_interface/src/utils/utils.dart';
 import 'package:flutter/services.dart';
@@ -31,18 +35,18 @@ void main() {
       );
     });
 
-    test("serializeDeviceOrientation() should serialize correctly", () {
+    test('serializeDeviceOrientation() should serialize correctly', () {
       expect(serializeDeviceOrientation(DeviceOrientation.portraitUp),
-          "portraitUp");
+          'portraitUp');
       expect(serializeDeviceOrientation(DeviceOrientation.portraitDown),
-          "portraitDown");
+          'portraitDown');
       expect(serializeDeviceOrientation(DeviceOrientation.landscapeRight),
-          "landscapeRight");
+          'landscapeRight');
       expect(serializeDeviceOrientation(DeviceOrientation.landscapeLeft),
-          "landscapeLeft");
+          'landscapeLeft');
     });
 
-    test("deserializeDeviceOrientation() should deserialize correctly", () {
+    test('deserializeDeviceOrientation() should deserialize correctly', () {
       expect(deserializeDeviceOrientation('portraitUp'),
           DeviceOrientation.portraitUp);
       expect(deserializeDeviceOrientation('portraitDown'),

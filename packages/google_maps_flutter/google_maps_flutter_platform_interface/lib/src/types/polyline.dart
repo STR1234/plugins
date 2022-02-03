@@ -1,10 +1,10 @@
-// Copyright 2019 The Chromium Authors. All rights reserved.
+// Copyright 2013 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:flutter/foundation.dart' show listEquals, VoidCallback;
+import 'package:flutter/foundation.dart'
+    show immutable, listEquals, VoidCallback;
 import 'package:flutter/material.dart' show Color, Colors;
-import 'package:meta/meta.dart' show immutable;
 
 import 'types.dart';
 
@@ -16,7 +16,7 @@ class PolylineId extends MapsObjectId<Polyline> {
   /// Creates an immutable object representing a [PolylineId] among [GoogleMap] polylines.
   ///
   /// An [AssertionError] will be thrown if [value] is null.
-  PolylineId(String value) : super(value);
+  const PolylineId(String value) : super(value);
 }
 
 /// Draws a line through geographical locations on the map.

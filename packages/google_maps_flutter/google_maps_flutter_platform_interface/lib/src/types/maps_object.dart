@@ -1,9 +1,8 @@
-// Copyright 2019 The Chromium Authors. All rights reserved.
+// Copyright 2013 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:flutter/foundation.dart' show objectRuntimeType;
-import 'package:meta/meta.dart' show immutable;
+import 'package:flutter/foundation.dart' show immutable, objectRuntimeType;
 
 /// Uniquely identifies object an among [GoogleMap] collections of a specific
 /// type.
@@ -14,7 +13,7 @@ class MapsObjectId<T> {
   /// Creates an immutable object representing a [T] among [GoogleMap] Ts.
   ///
   /// An [AssertionError] will be thrown if [value] is null.
-  MapsObjectId(this.value) : assert(value != null);
+  const MapsObjectId(this.value) : assert(value != null);
 
   /// The value of the id.
   final String value;

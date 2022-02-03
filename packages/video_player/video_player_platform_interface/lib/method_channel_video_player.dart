@@ -1,4 +1,4 @@
-// Copyright 2017 The Chromium Authors. All rights reserved.
+// Copyright 2013 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -12,6 +12,10 @@ import 'messages.dart';
 import 'video_player_platform_interface.dart';
 
 /// An implementation of [VideoPlayerPlatform] that uses method channels.
+///
+/// This is the default implementation, for compatibility with existing
+/// third-party implementations. It is not used by other implementations in
+/// this repository.
 class MethodChannelVideoPlayer extends VideoPlayerPlatform {
   VideoPlayerApi _api = VideoPlayerApi();
 
@@ -37,8 +41,12 @@ class MethodChannelVideoPlayer extends VideoPlayerPlatform {
       case DataSourceType.network:
         message.uri = dataSource.uri;
         message.formatHint = _videoFormatStringMap[dataSource.formatHint];
+        message.httpHeaders = dataSource.httpHeaders;
         break;
       case DataSourceType.file:
+        message.uri = dataSource.uri;
+        break;
+      case DataSourceType.contentUri:
         message.uri = dataSource.uri;
         break;
     }

@@ -1,4 +1,4 @@
-// Copyright 2017 The Chromium Authors. All rights reserved.
+// Copyright 2013 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -8,8 +8,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:video_player_platform_interface/messages.dart';
 import 'package:video_player_platform_interface/method_channel_video_player.dart';
-import 'package:video_player_platform_interface/test.dart';
 import 'package:video_player_platform_interface/video_player_platform_interface.dart';
+
+import 'test.dart';
 
 class _ApiLogger implements TestHostVideoPlayerApi {
   final List<String> log = [];
@@ -92,10 +93,12 @@ class _ApiLogger implements TestHostVideoPlayerApi {
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
+  // Store the initial instance before any tests change it.
+  final VideoPlayerPlatform initialInstance = VideoPlayerPlatform.instance;
+
   group('$VideoPlayerPlatform', () {
     test('$MethodChannelVideoPlayer() is the default instance', () {
-      expect(VideoPlayerPlatform.instance,
-          isInstanceOf<MethodChannelVideoPlayer>());
+      expect(initialInstance, isInstanceOf<MethodChannelVideoPlayer>());
     });
   });
 
@@ -141,8 +144,26 @@ void main() {
         formatHint: VideoFormat.dash,
       ));
       expect(log.log.last, 'create');
+      expect(log.createMessage?.asset, null);
       expect(log.createMessage?.uri, 'someUri');
+      expect(log.createMessage?.packageName, null);
       expect(log.createMessage?.formatHint, 'dash');
+      expect(log.createMessage?.httpHeaders, {});
+      expect(textureId, 3);
+    });
+
+    test('create with network (some headers)', () async {
+      final int? textureId = await player.create(DataSource(
+        sourceType: DataSourceType.network,
+        uri: 'someUri',
+        httpHeaders: {'Authorization': 'Bearer token'},
+      ));
+      expect(log.log.last, 'create');
+      expect(log.createMessage?.asset, null);
+      expect(log.createMessage?.uri, 'someUri');
+      expect(log.createMessage?.packageName, null);
+      expect(log.createMessage?.formatHint, null);
+      expect(log.createMessage?.httpHeaders, {'Authorization': 'Bearer token'});
       expect(textureId, 3);
     });
 
@@ -214,13 +235,16 @@ void main() {
     });
 
     test('videoEventsFor', () async {
-      ServicesBinding.instance?.defaultBinaryMessenger.setMockMessageHandler(
+      _ambiguate(ServicesBinding.instance)
+          ?.defaultBinaryMessenger
+          .setMockMessageHandler(
         "flutter.io/videoPlayer/videoEvents123",
         (ByteData? message) async {
           final MethodCall methodCall =
               const StandardMethodCodec().decodeMethodCall(message);
           if (methodCall.method == 'listen') {
-            await ServicesBinding.instance?.defaultBinaryMessenger
+            await _ambiguate(ServicesBinding.instance)
+                ?.defaultBinaryMessenger
                 .handlePlatformMessage(
                     "flutter.io/videoPlayer/videoEvents123",
                     const StandardMethodCodec()
@@ -232,7 +256,8 @@ void main() {
                     }),
                     (ByteData? data) {});
 
-            await ServicesBinding.instance?.defaultBinaryMessenger
+            await _ambiguate(ServicesBinding.instance)
+                ?.defaultBinaryMessenger
                 .handlePlatformMessage(
                     "flutter.io/videoPlayer/videoEvents123",
                     const StandardMethodCodec()
@@ -241,7 +266,8 @@ void main() {
                     }),
                     (ByteData? data) {});
 
-            await ServicesBinding.instance?.defaultBinaryMessenger
+            await _ambiguate(ServicesBinding.instance)
+                ?.defaultBinaryMessenger
                 .handlePlatformMessage(
                     "flutter.io/videoPlayer/videoEvents123",
                     const StandardMethodCodec()
@@ -254,7 +280,8 @@ void main() {
                     }),
                     (ByteData? data) {});
 
-            await ServicesBinding.instance?.defaultBinaryMessenger
+            await _ambiguate(ServicesBinding.instance)
+                ?.defaultBinaryMessenger
                 .handlePlatformMessage(
                     "flutter.io/videoPlayer/videoEvents123",
                     const StandardMethodCodec()
@@ -263,7 +290,8 @@ void main() {
                     }),
                     (ByteData? data) {});
 
-            await ServicesBinding.instance?.defaultBinaryMessenger
+            await _ambiguate(ServicesBinding.instance)
+                ?.defaultBinaryMessenger
                 .handlePlatformMessage(
                     "flutter.io/videoPlayer/videoEvents123",
                     const StandardMethodCodec()
@@ -307,3 +335,10 @@ void main() {
     });
   });
 }
+
+/// This allows a value of type T or T? to be treated as a value of type T?.
+///
+/// We use this so that APIs that have become non-nullable can still be used
+/// with `!` and `?` on the stable branch.
+// TODO(ianh): Remove this once we roll stable in late 2021.
+T? _ambiguate<T>(T? value) => value;

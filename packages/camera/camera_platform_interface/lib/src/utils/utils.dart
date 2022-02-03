@@ -1,3 +1,7 @@
+// Copyright 2013 The Flutter Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'package:camera_platform_interface/camera_platform_interface.dart';
 import 'package:flutter/services.dart';
 
@@ -33,13 +37,13 @@ String serializeDeviceOrientation(DeviceOrientation orientation) {
 /// Returns the device orientation for a given String.
 DeviceOrientation deserializeDeviceOrientation(String str) {
   switch (str) {
-    case "portraitUp":
+    case 'portraitUp':
       return DeviceOrientation.portraitUp;
-    case "portraitDown":
+    case 'portraitDown':
       return DeviceOrientation.portraitDown;
-    case "landscapeRight":
+    case 'landscapeRight':
       return DeviceOrientation.landscapeRight;
-    case "landscapeLeft":
+    case 'landscapeLeft':
       return DeviceOrientation.landscapeLeft;
     default:
       throw ArgumentError('"$str" is not a valid DeviceOrientation value');

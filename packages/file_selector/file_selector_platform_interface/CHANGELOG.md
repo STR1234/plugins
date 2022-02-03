@@ -1,3 +1,20 @@
+## 2.0.4
+
+* Removes dependency on `meta`.
+
+## 2.0.3
+
+* Minor code cleanup for new analysis rules.
+* Update to use the `verify` method introduced in plugin_platform_interface 2.1.0.
+
+## 2.0.2
+
+* Update platform_plugin_interface version requirement.
+
+## 2.0.1
+
+* Replace extensions with leading dots.
+
 ## 2.0.0
 
 * Migration to null-safety

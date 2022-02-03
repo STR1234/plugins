@@ -1,4 +1,4 @@
-// Copyright 2019 The Chromium Authors. All rights reserved.
+// Copyright 2013 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -7,13 +7,13 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('FlashMode should contain 4 options', () {
-    final values = FlashMode.values;
+    const List<FlashMode> values = FlashMode.values;
 
     expect(values.length, 4);
   });
 
-  test("FlashMode enum should have items in correct index", () {
-    final values = FlashMode.values;
+  test('FlashMode enum should have items in correct index', () {
+    const List<FlashMode> values = FlashMode.values;
 
     expect(values[0], FlashMode.off);
     expect(values[1], FlashMode.auto);

@@ -1,3 +1,16 @@
+## 0.8.3
+
+* Adds an endorsed Windows implementation.
+
+## 0.8.2+1
+
+* Minor code cleanup for new analysis rules.
+* Updated package description.
+
+## 0.8.2
+
+* Update `platform_plugin_interface` version requirement.
+
 ## 0.8.1
 
 Endorse the web implementation.
