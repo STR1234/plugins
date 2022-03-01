@@ -22,13 +22,14 @@ class GroundOverlay implements MapsObject<GroundOverlay> {
   /// 1. Using [height], [width] and [LatLng]
   /// 2. Using [width], [width]
   /// 3. Using [LatLngBounds]
-  const GroundOverlay({
+  GroundOverlay({
     required this.groundOverlayId,
     this.consumeTapEvents = false,
     this.location,
     this.zIndex = 0,
     this.onTap,
     this.visible = true,
+    this.year,
     this.bitmap,
     this.bounds,
     this.width,
@@ -59,19 +60,19 @@ class GroundOverlay implements MapsObject<GroundOverlay> {
 
   /// Creates an immutable representation of a [GroundOverlay] to draw on [GoogleMap]
   /// using [LatLngBounds]
-  const GroundOverlay.fromBounds(
+  GroundOverlay.fromBounds(
     this.bounds, {
     required this.groundOverlayId,
     this.anchor = Offset.zero,
     this.bearing = 0.0,
+    this.year,
     this.bitmap,
     this.consumeTapEvents = false,
     this.onTap,
     this.opacity = 1.0,
     this.visible = true,
     this.zIndex = 0,
-  })  : assert(opacity == null ||
-            (0.0 <= opacity && opacity <= 1.0)),
+  })  : assert(opacity == null || (0.0 <= opacity && opacity <= 1.0)),
         location = null,
         height = null,
         width = null;
@@ -91,7 +92,7 @@ class GroundOverlay implements MapsObject<GroundOverlay> {
   final LatLng? location;
 
   /// True if the ground overlay is visible.
-  final bool visible;
+  bool visible;
 
   /// The z-index of the ground overlay, used to determine relative drawing order of
   /// map overlays.
@@ -126,6 +127,20 @@ class GroundOverlay implements MapsObject<GroundOverlay> {
 
   /// A latitude/longitude alignment of the ground overlay.
   final LatLngBounds? bounds;
+
+  /// The year for which this groundOverlay (historic map) is an accurate representation.
+  final double? year;
+
+  /// Setter for the visible property of a ground overlay.
+  void setVisible(bool isVisible) {
+    this.visible = isVisible;
+  }
+
+  /// Returns the year of the historic map groundOverlay, if one is set.
+  /// Otherwise null.
+  double? getYear() {
+    return this.year;
+  }
 
   /// Creates a new [GroundOverlay] object whose values are the same as this instance,
   /// unless overwritten by the specified parameters.
