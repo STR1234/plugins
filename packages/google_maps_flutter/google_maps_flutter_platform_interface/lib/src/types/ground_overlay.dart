@@ -30,6 +30,7 @@ class GroundOverlay implements MapsObject<GroundOverlay> {
     this.onTap,
     this.visible = true,
     this.year,
+    this.isDarkmode = false,
     this.bitmap,
     this.bounds,
     this.width,
@@ -66,6 +67,7 @@ class GroundOverlay implements MapsObject<GroundOverlay> {
     this.anchor = Offset.zero,
     this.bearing = 0.0,
     this.year,
+    this.isDarkmode,
     this.bitmap,
     this.consumeTapEvents = false,
     this.onTap,
@@ -131,6 +133,9 @@ class GroundOverlay implements MapsObject<GroundOverlay> {
   /// The year for which this groundOverlay (historic map) is an accurate representation.
   final double? year;
 
+  /// Determines if the groundOverlay is for darkmode or not.
+  final bool? isDarkmode;
+
   /// Setter for the visible property of a ground overlay.
   void setVisible(bool isVisible) {
     this.visible = isVisible;
@@ -140,6 +145,11 @@ class GroundOverlay implements MapsObject<GroundOverlay> {
   /// Otherwise null.
   double? getYear() {
     return this.year;
+  }
+
+  /// Returns if this groundOverlay image is a darkmode image version.
+  bool? getIsDarkMode() {
+    return this.isDarkmode;
   }
 
   /// Creates a new [GroundOverlay] object whose values are the same as this instance,
