@@ -10,9 +10,12 @@ dependencies:
   flutter_plugin_android_lifecycle: ^2.0.0
   google_maps_flutter_platform_interface:
     git:
-      url: https://github.com/strigePC/plugins.git
+      # url: https://github.com/strigePC/plugins.git
+      # path: packages/google_maps_flutter/google_maps_flutter_platform_interface/
+      # ref: maps-ground-overlays
+      url: https://github.com/STR1234/plugins.git
       path: packages/google_maps_flutter/google_maps_flutter_platform_interface/
-      ref: maps-ground-overlays
+      # ref: maps-ground-overlays
 
 dev_dependencies:
   flutter_test:
