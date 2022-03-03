@@ -112,7 +112,7 @@ class MarkerId extends MapsObjectId<Marker> {
 /// A marker icon is drawn oriented against the device's screen rather than
 /// the map's surface; that is, it will not necessarily change orientation
 /// due to map rotations, tilting, or zooming.
-@immutable
+
 class Marker implements MapsObject {
   /// Creates a set of marker configuration options.
   ///
@@ -133,7 +133,7 @@ class Marker implements MapsObject {
   /// * is placed at the base of the drawing order; [zIndex] is 0.0
   /// * reports [onTap] events
   /// * reports [onDragEnd] events
-  const Marker({
+  Marker({
     required this.markerId,
     this.alpha = 1.0,
     this.anchor = const Offset(0.5, 1.0),
@@ -159,7 +159,7 @@ class Marker implements MapsObject {
   /// The opacity of the marker, between 0.0 and 1.0 inclusive.
   ///
   /// 0.0 means fully transparent, 1.0 means fully opaque.
-  final double alpha;
+  double alpha;
 
   /// The icon image point that will be placed at the [position] of the marker.
   ///
@@ -209,6 +209,11 @@ class Marker implements MapsObject {
 
   /// Signature reporting the new [LatLng] at the end of a drag event.
   final ValueChanged<LatLng>? onDragEnd;
+
+  /// Sets the [alpha] value of this marker.
+  void setAlpha(double alpha) {
+    this.alpha = alpha;
+  }
 
   /// Creates a new [Marker] object whose values are the same as this instance,
   /// unless overwritten by the specified parameters.
